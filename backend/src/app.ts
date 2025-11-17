@@ -1,0 +1,35 @@
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import xss from 'xss-clean';
+import mongoLoader from './loaders/mongoose';
+import routes from './routes';
+
+const app = express()
+
+// security middleware
+app.use(helmet());
+app.use(cors());
+app.use(xss());
+
+app.use(express.json());
+
+// rate limiter for login/bruteforce protection
+
+app.use(
+    '/auth/login',
+    rateLimit({
+        windowMs: 1 * 60 * 1000,
+        max: 5,
+        message: 'Too many login attempts, please try again after 1 minute',
+    })
+)
+
+// connect to database
+mongoLoader()
+
+// load routes
+app.use('/api', routes);
+
+export default app;
