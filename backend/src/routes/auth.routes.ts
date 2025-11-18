@@ -1,9 +1,9 @@
 import {Router} from 'express';
+import AuthController from '../controllers/AuthController';
 
 const router = Router()
 
-router.get('/', (req,res) => {
-    res.send('Auth route working');
-});
+router.post('/login', AuthController.login.bind(AuthController));
+router.post('/register-staff', AuthController.registerStaff.bind(AuthController));
 
 export default router;
