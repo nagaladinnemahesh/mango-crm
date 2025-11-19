@@ -10,6 +10,14 @@ class UserRepository{
         const user = new User(data);
         return user.save();
     }
+
+    async updateStore(staffId: string, storeId: string){
+        return User.findOneAndUpdate(
+            {staffId},
+            {storeId},
+            {new: true}
+        )
+    }
 }
 
 export default new UserRepository();
