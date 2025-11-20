@@ -16,16 +16,15 @@ class AuthController {
 
     async registerStaff(req: Request, res: Response){
         try {
-            const {staffId, name, pin, role, storeId} = req.body;
+            const {name, pin, role} = req.body;
 
-            const pinHash = await hashPin(pin);
-
+            if (!name || !pin || !role){
+                return res.status(400).json({error: 'name, pin, and role required'});
+            }
             const user = await AuthService.registerStaff({
-                staffId,
                 name,
-                role,
-                storeId,
-                pinHash,
+                pin,
+                role
             });
 
             return res.json(user);

@@ -1,6 +1,6 @@
 export interface IUser {
     _id?: string;
-    staffId: string;
+    staffId?: string;
     name: string;
     pinHash: string;
     role: 'admin' | 'manager' | 'staff';
