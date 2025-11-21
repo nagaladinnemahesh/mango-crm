@@ -4,6 +4,8 @@ import storeRoutes from './store.routes';
 import staffRoutes from './staff.routes';
 import billingRoutes from './billing.routes';
 import customerRoutes from './customer.routes';
+import productRoutes from './product.routes';
+import stockRoutes from './stock.routes';
 import { authMiddleware } from '../middleware/authMiddleware';
 import { roleMiddleware } from '../middleware/roleMiddleware';
 
@@ -14,6 +16,8 @@ router.use('/stores', storeRoutes);
 router.use('/staff', staffRoutes);
 router.use('/customers', customerRoutes);
 router.use('/billing', billingRoutes);
+router.use('/products', productRoutes);
+router.use('/stock', stockRoutes)
 
 router.get(
     '/protected',
